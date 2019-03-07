@@ -87,4 +87,4 @@ async def relinquish(ctx):
     await client.send_message(ctx.message.channel, "Relinquish Successful! " + str(random.choice(namelist)) + " is now yeetmaster.")
 
 
-client.run('BOT_TOKEN')
+client.run(str(os.environ.get('BOT_TOKEN')))
