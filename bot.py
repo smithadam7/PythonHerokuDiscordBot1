@@ -82,7 +82,12 @@ async def bye(ctx):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, "bye")
 
-@client.command()
+@client.command(pass_context=True)
+async def leave(ctx):
+    await client.disconnect()
+    await client.send_message(ctx.message.channel, "ok I'm LEAVING")
+
+@client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
     await ctx.send(left + right)
