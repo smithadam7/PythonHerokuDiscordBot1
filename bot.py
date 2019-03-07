@@ -44,6 +44,8 @@ async def on_message(message):
 
     await client.process_commands(message) # Allows client commands to work
 
+
+#Bot commands with prefix
 @client.command(pass_context=True)
 async def help(ctx):
     server = ctx.message.server
