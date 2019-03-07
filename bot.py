@@ -33,7 +33,7 @@ async def on_message(message):
 
     fireObj = re.search( r'fire', message.content, re.M|re.I)
     if fireObj:
-        await client.add_reaction(message, ":fire:")
+        await client.add_reaction(message, "\U0001F525")
 
 @client.command(pass_context=True)
 async def play (ctx, url):
