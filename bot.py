@@ -46,6 +46,17 @@ async def on_message(message):
 
 
 @client.command(pass_context=True)
+async def help(ctx):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, """Commands:
+	;help - shows commands
+	;status (url) - shows status from a get request to the url
+	;add (int 1) (int 2) - adds the 2 numbers given as parameters
+	flip - return heads or tails 
+	fire - reacts with fire emoji 
+	""")
+
+@client.command(pass_context=True)
 async def bye(ctx):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, "bye")
@@ -54,7 +65,7 @@ async def bye(ctx):
 async def status(ctx ,url):
     server = ctx.message.server
     req = requests.get(url)
-    await client.send_message(ctx.message.channel, req.status_code)
+    await client.send_message(ctx.message.channel, "Code: " + str(req.status_code)) # https://httpstat.us/ for different codes
 
 @client.command(pass_context=True)
 async def tap(ctx):
