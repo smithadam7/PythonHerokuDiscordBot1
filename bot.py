@@ -7,7 +7,7 @@ import asyncio
 import random
 import requests
 import os # For use of environ, which is for heroku to use environment var bot token
-import re
+import re # For use of regex
 from discord import opus
 
 client = commands.Bot(command_prefix=';')
@@ -44,41 +44,6 @@ async def on_message(message):
 
     await client.process_commands(message) # Allows client commands to work
 
-@client.command(pass_context=True)
-async def play(ctx, url):
-    channel = ctx.message.author.voice_channel
-    await client.join_voice_channel(channel)
-    server = ctx.message.server
-    voice = client.voice_client_in(server)
-    player = await voice.create_ytdl_player(url)
-    player_dict[server.id] = player
-    await client.send_message(ctx.message.channel, "Playing `%s` now" % player.title)
-    player.start()
-
-
-@client.command(pass_context=True)
-async def stop(ctx):
-    server = ctx.message.server
-    player = player_dict[server.id]
-    player.stop()
-    await client.send_message(ctx.message.channel, "Stopped `%s`" % player.title)
-    del player_dict[server.id]
-
-
-@client.command(pass_context=True)
-async def pause(ctx):
-    server = ctx.message.server
-    player = player_dict[server.id]
-    player.pause()
-    await client.send_message(ctx.message.channel, "Paused `%s`" % player.title)
-
-
-@client.command(pass_context=True)
-async def resume(ctx):
-    server = ctx.message.server
-    player = player_dict[server.id]
-    player.resume()
-    await client.send_message(ctx.message.channel, "Resumed `%s`" % player.title)
 
 @client.command(pass_context=True)
 async def bye(ctx):
@@ -86,19 +51,16 @@ async def bye(ctx):
     await client.send_message(ctx.message.channel, "bye")
 
 @client.command(pass_context=True)
-async def leave(ctx):
-    for x in client.voice_clients:
-        if(x.server == ctx.message.server):
-            return await x.disconnect()
-
-    return await client.say("I am not connected to any voice channel on this server!")
+async def downstatus(ctx, url):
+    server = ctx.message.server
+    r = requests.get(url)
+    await client.send_message(ctx.message.channel, "The url responed: "+ r.status_code)
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
     server = ctx.message.server
-
-    await ctx.send(left + right)
+    await client.send_message(ctx.message.channel, left + right)
 
 
 client.run(str(os.environ.get('BOT_TOKEN')))
