@@ -5,6 +5,7 @@ import asyncio
 import random
 import requests
 import os
+import re
 
 client = commands.Bot(command_prefix=";")
 player_dict = dict()
@@ -20,6 +21,10 @@ async def on_message(message):
         return
     if message.content == "Hello":
         await client.send_message(message.channel, "World")
+	searchObj = re.search( r'gg', message.content, re.M|re.I)
+	if searchObj:
+		await client.send_message(message.channel, "GG")
+
 
 @client.command(pass_context=True)
 async def play (ctx, url):
