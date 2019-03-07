@@ -51,10 +51,15 @@ async def bye(ctx):
     await client.send_message(ctx.message.channel, "bye")
 
 @client.command(pass_context=True)
-async def downstatus(ctx ,url):
+async def status(ctx ,url):
     server = ctx.message.server
     req = requests.get(url)
     await client.send_message(ctx.message.channel, req.status_code)
+
+@client.command(pass_context=True)
+async def tap(ctx):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, "A" + "B")
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
