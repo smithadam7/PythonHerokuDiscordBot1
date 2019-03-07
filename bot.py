@@ -1,4 +1,4 @@
-# Python Discord Bot
+# Python Discord Bot called Pyreply
 # Add to server with this https://discordapp.com/oauth2/authorize?client_id=CLIENTID&scope=bot CLIENTID is found under OAuth2 in discord developer portal
 import discord
 from discord.ext import commands
@@ -54,7 +54,7 @@ async def bye(ctx):
 async def status(ctx ,url):
     server = ctx.message.server
     req = requests.get(url)
-    await client.send_message(ctx.message.channel, "Code: " + str(req.status_code)) # https://httpstat.us/ for different codes
+    await client.send_message(ctx.message.channel, "Code: " + str(req.status_code)) # Use https://httpstat.us/ for different codes
 
 @client.command(pass_context=True)
 async def tap(ctx):
@@ -67,9 +67,15 @@ async def add(ctx, left: int, right: int):
     await client.send_message(ctx.message.channel, left + right)
 
 @client.command(pass_context=True)
-async def hel(ctx):
+async def hel(ctx): # help is predefined
     server = ctx.message.server
-    await client.send_message(ctx.message.channel, "bye")
+    await client.send_message(ctx.message.channel, "https://github.com/smithadam7/PythonHerokuDiscordBot1/blob/master/README.md")
+
+@client.command(pass_context=True)
+async def relinquish(ctx):
+    server = ctx.message.server
+    x = message.server.members
+    await client.send_message(ctx.message.channel, random.choice(x))
 
 
 client.run(str(os.environ.get('BOT_TOKEN')))
