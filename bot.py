@@ -51,14 +51,13 @@ async def bye(ctx):
     await client.send_message(ctx.message.channel, "bye")
 
 @client.command(pass_context=True)
-async def downstatus(ctx, url):
+async def downstatus(ctx):
     server = ctx.message.server
-    r = requests.get(url)
-    await client.send_message(ctx.message.channel, "The url responed: "+ r.status_code)
+    req = requests.get('https://tutsplus.com/')
+    await client.send_message(ctx.message.channel, "The url responed: "+ req.status_code)
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
-    """Adds two numbers together."""
     server = ctx.message.server
     await client.send_message(ctx.message.channel, left + right)
 
