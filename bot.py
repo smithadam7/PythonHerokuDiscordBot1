@@ -46,12 +46,6 @@ async def on_message(message):
 
 
 @client.command(pass_context=True)
-async def help(ctx):
-    server = ctx.message.server
-    await client.send_message(ctx.message.channel, "how")
-
-
-@client.command(pass_context=True)
 async def bye(ctx):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, "bye")
@@ -61,6 +55,11 @@ async def status(ctx ,url):
     server = ctx.message.server
     req = requests.get(url)
     await client.send_message(ctx.message.channel, "Code: " + str(req.status_code)) # https://httpstat.us/ for different codes
+
+@client.command(pass_context=True)
+async def tap(ctx):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, "A" + str(200))
 
 @client.command(pass_context=True)
 async def tap(ctx):
