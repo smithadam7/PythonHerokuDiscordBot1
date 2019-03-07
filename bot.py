@@ -66,5 +66,10 @@ async def add(ctx, left: int, right: int):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, left + right)
 
+@client.command(pass_context=True)
+async def help(ctx):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, "bye")
+
 
 client.run(str(os.environ.get('BOT_TOKEN')))
