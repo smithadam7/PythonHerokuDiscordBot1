@@ -14,6 +14,12 @@ player_dict = dict()
 async def on_ready():
     print("System Online")
 
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content == "Hello":
+        await client.send_message(message.channel, "World")
 
 @client.command(pass_context=True)
 async def play (ctx, url):
