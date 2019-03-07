@@ -72,7 +72,12 @@ async def mul(ctx, left: int, right: int):
     await client.send_message(ctx.message.channel, left * right)
 
 @client.command(pass_context=True)
-async def hel(ctx): # help is predefined
+async def pow(ctx, left: int, right: int):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, left ** right)
+
+@client.command(pass_context=True)
+async def helpme(ctx): # help is predefined
     server = ctx.message.server
     await client.send_message(ctx.message.channel, "https://github.com/smithadam7/PythonHerokuDiscordBot1/blob/master/README.md")
 
@@ -82,7 +87,6 @@ async def relinquish(ctx):
     x = ctx.message.server.members
     namelist = []
     for member in x:
-        print(member.name)
         namelist.append(member.name)
     await client.send_message(ctx.message.channel, "Relinquish Successful! " + str(random.choice(namelist)) + " is now yeetmaster.")
 
