@@ -48,12 +48,8 @@ async def on_message(message):
 @client.command(pass_context=True)
 async def help(ctx):
     server = ctx.message.server
-    await client.send_message(ctx.message.channel, "Commands:\
-	;help - show commands\
-	;status (url) - shows status from a get request to the url\
-	;add (int 1) (int 2) - adds the 2 numbers given as parameters\
-	flip - return heads or tails\
-	fire - reacts with fire emoji")
+    await client.send_message(ctx.message.channel, "how")
+
 
 @client.command(pass_context=True)
 async def bye(ctx):
