@@ -35,6 +35,10 @@ async def on_message(message):
     if fireObj:
         await client.add_reaction(message, "\U0001F525")
 
+    pooObj = re.search( r'poo', message.content, re.M|re.I)
+    if pooObj:
+        await client.add_reaction(message, "\U0001F4A9")
+
 @client.command(pass_context=True)
 async def play (ctx, url):
     channel = ctx.message.author.voice_channel
@@ -71,6 +75,10 @@ async def resume(ctx):
     player.resume()
     await client.send_message(ctx.message.channel, "Resumed `%s`" % player.title)
 
+@client.command(pass_context=True)
+async def bye(ctx):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, "bye")
 
 
 
