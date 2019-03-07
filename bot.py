@@ -79,11 +79,12 @@ async def hel(ctx): # help is predefined
 @client.command(pass_context=True)
 async def relinquish(ctx):
     server = ctx.message.server
-    x = message.server.members
-    names = []
+    x = ctx.message.server.members
+    namelist = []
     for member in x:
-        names.append[x]
-    await client.send_message(ctx.message.channel, str(random.choice(x)))
+        print(member.name)
+        namelist.append(member.name)
+    await client.send_message(ctx.message.channel, "Relinquish Successful! " + str(random.choice(namelist)) + " is now yeetmaster.")
 
 
-client.run(str(os.environ.get('BOT_TOKEN')))
+client.run('MzY0MTIxNDA5NjU3NjM0ODI2.D2JydQ.g7ihk3bhPhq1fQfYqRHHTVMBIkM')
