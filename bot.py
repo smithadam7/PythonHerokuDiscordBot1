@@ -7,7 +7,7 @@ import requests
 import os
 import re
 
-client = commands.Bot(command_prefix=";")
+client = commands.Bot(command_prefix='$')
 player_dict = dict()
 
 
@@ -17,7 +17,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == client.user: # bot won't talk to itself
         return
     if message.content == "Hello":
         await client.send_message(message.channel, "Hello")
@@ -33,14 +33,14 @@ async def on_message(message):
 
     fireObj = re.search( r'fire', message.content, re.M|re.I)
     if fireObj:
-        await client.add_reaction(message, "\U0001F525")
+        await client.add_reaction(message, "\U0001F525") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
 
     pooObj = re.search( r'poo', message.content, re.M|re.I)
     if pooObj:
-        await client.add_reaction(message, "\U0001F4A9")
+        await client.add_reaction(message, "\U0001F4A9") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
 
 @client.command(pass_context=True)
-async def play (ctx, url):
+async def play(ctx, url):
     channel = ctx.message.author.voice_channel
     await client.join_voice_channel(channel)
     server = ctx.message.server
