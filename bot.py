@@ -84,7 +84,7 @@ async def bye(ctx):
 
 @client.command(pass_context=True)
 async def leave(ctx):
-    await client.disconnect()
+#    await client.disconnect()
     await client.send_message(ctx.message.channel, "ok I'm LEAVING")
 
 @client.command(pass_context=True)
