@@ -1,11 +1,14 @@
+# Python Discord Bot
+# Add to server with this https://discordapp.com/oauth2/authorize?client_id=CLIENTID&scope=bot CLIENTID is found under OAuth2 in discord developer portal
 import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
 import random
 import requests
-import os
+import os # For use of environ, which is for heroku to use environment var bot token
 import re
+from discord import opus
 
 client = commands.Bot(command_prefix=';')
 player_dict = dict()
@@ -84,13 +87,17 @@ async def bye(ctx):
 
 @client.command(pass_context=True)
 async def leave(ctx):
-    server = ctx.message.server
-    await client.close()
+    for x in client.voice_clients:
+        if(x.server == ctx.message.server):
+            return await x.disconnect()
+
+    return await client.say("I am not connected to any voice channel on this server!")
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
     server = ctx.message.server
+
     await ctx.send(left + right)
 
 
