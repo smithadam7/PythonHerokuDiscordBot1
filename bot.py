@@ -67,7 +67,7 @@ async def add(ctx, left: int, right: int):
     await client.send_message(ctx.message.channel, left + right)
 
 @client.command(pass_context=True)
-async def help(ctx):
+async def hel(ctx):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, "bye")
 
