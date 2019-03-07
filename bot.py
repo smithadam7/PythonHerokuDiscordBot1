@@ -7,7 +7,7 @@ import requests
 import os
 import re
 
-client = commands.Bot(command_prefix=';')
+client = commands.Bot(command_prefix='?')
 player_dict = dict()
 
 
@@ -81,16 +81,9 @@ async def bye(ctx):
     await client.send_message(ctx.message.channel, "bye")
 
 @client.command()
-async def roll(ctx, dice: str):
-    """Rolls a dice in NdN format."""
-    try:
-        rolls, limit = map(int, dice.split('d'))
-    except Exception:
-        await ctx.send('Format has to be in NdN!')
-        return
-
-    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-    await ctx.send(result)
+async def add(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left + right)
 
 
 client.run(str(os.environ.get('BOT_TOKEN')))
