@@ -80,11 +80,17 @@ async def bye(ctx):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, "bye")
 
-@client.command(pass_context=True)
-async def hel(ctx):
-    await client.say("A help message is sent to user")
-    await client.send_message(ctx.message.channel, "bye")
-    await client.send_message(message.channel, "bye2")
+@client.command()
+async def roll(ctx, dice: str):
+    """Rolls a dice in NdN format."""
+    try:
+        rolls, limit = map(int, dice.split('d'))
+    except Exception:
+        await ctx.send('Format has to be in NdN!')
+        return
+
+    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
+    await ctx.send(result)
 
 
 client.run(str(os.environ.get('BOT_TOKEN')))
