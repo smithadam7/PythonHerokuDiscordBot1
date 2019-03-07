@@ -21,14 +21,19 @@ async def on_message(message):
         return
     if message.content == "Hello":
         await client.send_message(message.channel, "Hello")
+
     searchObj = re.search( r'gg', message.content, re.M|re.I)
     if searchObj:
         await client.send_message(message.channel, "GG")
+
     flipObj = re.search( r'flip', message.content, re.M|re.I)
     if flipObj:
-        tfseq = ["Heads","Tails"] # Head or Tails Sequence for flipping a coin
-        await client.send_message(message.channel, random.choice(tfseq))
+        htseq = ["Heads","Tails"] # Head or Tails Sequence for flipping a coin
+        await client.send_message(message.channel, random.choice(htseq))
 
+    fireObj = re.search( r'fire', message.content, re.M|re.I)
+    if fireObj:
+        await client.add_reaction(message, ":fire:")
 
 @client.command(pass_context=True)
 async def play (ctx, url):
