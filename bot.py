@@ -84,11 +84,7 @@ async def bye(ctx):
 
 @client.command(pass_context=True)
 async def leave(ctx):
-    for x in client.voice_clients:
-        if(x.server == ctx.message.server):
-            return await x.disconnect()
-
-    return await client.say("I am not connected to any voice channel on this server!")
+    client.close()
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
