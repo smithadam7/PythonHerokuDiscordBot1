@@ -20,10 +20,13 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.content == "Hello":
-        await client.send_message(message.channel, "World")
+        await client.send_message(message.channel, "Hello")
     searchObj = re.search( r'gg', message.content, re.M|re.I)
     if searchObj:
         await client.send_message(message.channel, "GG")
+    flipObj = re.search( r'flip', message.content, re.M|re.I)
+    if flipObj:
+        await client.send_message(message.channel, random.choice("Heads","Tails"))
 
 
 @client.command(pass_context=True)
