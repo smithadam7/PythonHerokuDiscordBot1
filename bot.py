@@ -54,7 +54,7 @@ async def bye(ctx):
 async def downstatus(ctx):
     server = ctx.message.server
     req = requests.get('https://tutsplus.com/')
-    await client.send_message(ctx.message.channel, "The url responed: "+ req.status_code)
+    await client.send_message(ctx.message.channel, req.status_code)
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
