@@ -7,7 +7,7 @@ import requests
 import os
 import re
 
-client = commands.Bot(command_prefix='?')
+client = commands.Bot(command_prefix=';')
 player_dict = dict()
 
 
@@ -38,6 +38,8 @@ async def on_message(message):
     pooObj = re.search( r'poo', message.content, re.M|re.I)
     if pooObj:
         await client.add_reaction(message, "\U0001F4A9") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
+
+    await bot.process_commands(message) # Allows client commands to work
 
 @client.command(pass_context=True)
 async def play(ctx, url):
