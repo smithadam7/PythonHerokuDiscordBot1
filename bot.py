@@ -84,11 +84,13 @@ async def bye(ctx):
 
 @client.command(pass_context=True)
 async def leave(ctx):
-    client.close()
+    server = ctx.message.server
+    await client.close()
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
     """Adds two numbers together."""
+    server = ctx.message.server
     await ctx.send(left + right)
 
 
