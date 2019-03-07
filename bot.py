@@ -7,7 +7,7 @@ import requests
 import os
 import re
 
-client = commands.Bot(command_prefix='$')
+client = commands.Bot(command_prefix=';')
 player_dict = dict()
 
 
@@ -80,6 +80,11 @@ async def bye(ctx):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, "bye")
 
+@client.command(pass_context=True)
+async def hel(ctx):
+    await client.say("A help message is sent to user")
+    await client.send_message(ctx.message.channel, "bye")
+    await client.send_message(message.channel, "bye2")
 
 
 client.run(str(os.environ.get('BOT_TOKEN')))
