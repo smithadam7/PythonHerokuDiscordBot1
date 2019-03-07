@@ -27,7 +27,12 @@ async def on_message(message):
 
     searchObj = re.search( r'gg', message.content, re.M|re.I)
     if searchObj:
-        await client.send_message(message.channel, "GG")
+        await client.send_message(message.channel, "Good Game")
+
+    skribblObj = re.search( r'skribbl.io', message.content, re.M|re.I)
+    if skribblObj:
+        await asyncio.sleep(3)
+        await client.delete_message(message)
 
     flipObj = re.search( r'flip', message.content, re.M|re.I)
     if flipObj:
