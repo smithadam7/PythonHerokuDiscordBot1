@@ -59,7 +59,7 @@ async def status(ctx ,url):
 @client.command(pass_context=True)
 async def tap(ctx):
     server = ctx.message.server
-    await client.send_message(ctx.message.channel, "A" + "B")
+    await client.send_message(ctx.message.channel, "A" + 200)
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
