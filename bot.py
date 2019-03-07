@@ -83,7 +83,7 @@ async def relinquish(ctx):
     names = []
     for member in x:
         names.append[x]
-    await client.send_message(ctx.message.channel, random.choice(names))
+    await client.send_message(ctx.message.channel, str(random.choice(x)))
 
 
 client.run(str(os.environ.get('BOT_TOKEN')))
