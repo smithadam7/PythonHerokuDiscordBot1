@@ -67,6 +67,11 @@ async def add(ctx, left: int, right: int):
     await client.send_message(ctx.message.channel, left + right)
 
 @client.command(pass_context=True)
+async def mul(ctx, left: int, right: int):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, left * right)
+
+@client.command(pass_context=True)
 async def hel(ctx): # help is predefined
     server = ctx.message.server
     await client.send_message(ctx.message.channel, "https://github.com/smithadam7/PythonHerokuDiscordBot1/blob/master/README.md")
@@ -75,7 +80,10 @@ async def hel(ctx): # help is predefined
 async def relinquish(ctx):
     server = ctx.message.server
     x = message.server.members
-    await client.send_message(ctx.message.channel, random.choice(x))
+    names = []
+    for member in x:
+        names.append[x]
+    await client.send_message(ctx.message.channel, random.choice(names))
 
 
 client.run(str(os.environ.get('BOT_TOKEN')))
