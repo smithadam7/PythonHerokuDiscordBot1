@@ -62,11 +62,6 @@ async def tap(ctx):
     await client.send_message(ctx.message.channel, "A" + str(200))
 
 @client.command(pass_context=True)
-async def tap(ctx):
-    server = ctx.message.server
-    await client.send_message(ctx.message.channel, "A" + str(200))
-
-@client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, left + right)
