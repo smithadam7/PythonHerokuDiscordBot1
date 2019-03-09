@@ -17,6 +17,7 @@ player_dict = dict()
 @client.event
 async def on_ready():
     print("System Online")
+    await client.change_presence(status=discord.Status.dnd) # set bot to do not distrub
 
 @client.event
 async def on_message(message):
@@ -80,6 +81,21 @@ async def mul(ctx, left: int, right: int):
 async def pow(ctx, left: int, right: int):
     server = ctx.message.server
     await client.send_message(ctx.message.channel, left ** right)
+
+@client.command(pass_context=True)
+async def sub(ctx, left: int, right: int):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, left - right)
+
+@client.command(pass_context=True)
+async def div(ctx, left: int, right: int):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, left / right)
+
+@client.command(pass_context=True)
+async def mod(ctx, left: int, right: int):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, left % right)
 
 @client.command(pass_context=True)
 async def helpme(ctx): # help is predefined
