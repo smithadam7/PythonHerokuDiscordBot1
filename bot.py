@@ -52,6 +52,14 @@ async def on_message(message):
     if monkeyObj:
         await client.add_reaction(message, "\U0001F412") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
 
+    burritoObj = re.search( r'burrito', message.content, re.M|re.I)
+    if burritoObj:
+        await client.add_reaction(message, "\U0001F32F") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
+
+    booObj = re.search( r'boo', message.content, re.M|re.I)
+    if booObj:
+        await client.add_reaction(message, "\U0001F47B") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
+
     await client.process_commands(message) # Allows client commands to work
 
 
