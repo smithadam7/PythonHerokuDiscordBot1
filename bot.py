@@ -60,6 +60,10 @@ async def on_message(message):
     if booObj:
         await client.add_reaction(message, "\U0001F47B") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
 
+    watermelonObj = re.search( r'watermelon', message.content, re.M|re.I)
+    if watermelonObj:
+        await client.add_reaction(message, "\U0001F349") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
+
     await client.process_commands(message) # Allows client commands to work
 
 
