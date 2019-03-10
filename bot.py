@@ -48,6 +48,10 @@ async def on_message(message):
     if pooObj:
         await client.add_reaction(message, "\U0001F4A9") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
 
+    monkeyObj = re.search( r'monkey', message.content, re.M|re.I)
+    if monkeyObj:
+        await client.add_reaction(message, "\U0001F412") # Python source code for emoji found at http://www.fileformat.info/info/unicode/char/search.htm
+
     await client.process_commands(message) # Allows client commands to work
 
 
