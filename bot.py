@@ -91,7 +91,7 @@ async def text(ctx, carrier, phonenumber, textmessage):
     server = ctx.message.server
     await client.delete_message(ctx.message) #deletes message for privacy
     username = "prepaidburner@gmail.com"
-    password = str(os.environ.get('EMAIL_PASS'))
+    password = str(os.environ.get('EMAIL_PASS')) # set enviornment variable for the email password
     newcarrier = "default"
     sprintObj = re.search( r'sprint', carrier, re.M|re.I)
     if sprintObj:
@@ -114,7 +114,7 @@ async def text(ctx, carrier, phonenumber, textmessage):
     server.login(username, password)
     server.sendmail(username, reciever, textmessage)
     server.quit()
-    await client.send_message(ctx.message.channel, textmessage + " sent to private number.")
+    await client.send_message(ctx.message.channel, "(" + textmessage + ")" + " sent to private number.")
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
@@ -161,4 +161,4 @@ async def relinquish(ctx):
     await client.send_message(ctx.message.channel, "Relinquish Successful! " + str(random.choice(namelist)) + " is now yeetmaster.")
 
 
-client.run(str(os.environ.get('BOT_TOKEN')))
+client.run(str(os.environ.get('BOT_TOKEN'))) # enviornment variable for the bot token
