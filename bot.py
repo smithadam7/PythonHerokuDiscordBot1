@@ -9,6 +9,7 @@ import requests
 import os # For use of environ, which is for heroku to use environment var bot token
 import re # For use of regex
 from discord import opus
+import smtplib
 
 client = commands.Bot(command_prefix=';')
 player_dict = dict()
@@ -73,15 +74,47 @@ async def bye(ctx):
     await client.send_message(ctx.message.channel, "bye")
 
 @client.command(pass_context=True)
+async def edit(ctx):
+    server = ctx.message.server
+    await client.delete_message(ctx.message)
+    await client.send_message(ctx.message.channel, "edited")
+
+@client.command(pass_context=True)
 async def status(ctx ,url):
     server = ctx.message.server
     req = requests.get(url)
     await client.send_message(ctx.message.channel, "Code: " + str(req.status_code)) # Use https://httpstat.us/ for different codes
 
+#Send a custom text message via gmail to any number on the 4 main cell phone providers
 @client.command(pass_context=True)
-async def tap(ctx):
+async def text(ctx, carrier, phonenumber, textmessage):
     server = ctx.message.server
-    await client.send_message(ctx.message.channel, "A" + str(200))
+    await client.delete_message(ctx.message) #deletes message for privacy
+    username = "prepaidburner@gmail.com"
+    password = str(os.environ.get('EMAIL_PASS'))
+    newcarrier = "default"
+    sprintObj = re.search( r'sprint', carrier, re.M|re.I)
+    if sprintObj:
+        newcarrier = "@pm.sprint.com"
+    verizonObj = re.search( r'verizon', carrier, re.M|re.I)
+    if verizonObj:
+        newcarrier = "@vtext.com"
+    atObj = re.search( r'at', carrier, re.M|re.I)
+    if atObj:
+        newcarrier = "@mms.att.net"
+    tmobileObj = re.search( r'tmo', carrier, re.M|re.I)
+    if tmobileObj:
+        newcarrier = "@tmomail.net"
+    if newcarrier == "default":
+        await client.send_message(ctx.message.channel, carrier + " carrier not supported.")
+        return
+    reciever = phonenumber + newcarrier
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(username, password)
+    server.sendmail(username, reciever, textmessage)
+    server.quit()
+    await client.send_message(ctx.message.channel, textmessage + " sent to private number.")
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
