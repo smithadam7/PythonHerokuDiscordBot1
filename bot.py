@@ -94,6 +94,7 @@ async def status(ctx ,url):
 @client.command(pass_context=True)
 async def text(ctx, carrier, phonenumber, textmessage):
     server = ctx.message.server
+    author = ctx.message.author
     await client.delete_message(ctx.message) #deletes message for privacy
     username = "prepaidburner@gmail.com"
     password = str(os.environ.get('EMAIL_PASS')) # set enviornment variable for the email password
@@ -119,7 +120,7 @@ async def text(ctx, carrier, phonenumber, textmessage):
     server.login(username, password)
     server.sendmail(username, reciever, textmessage)
     server.quit()
-    await client.send_message(ctx.message.channel, ctx.message.author + " has sent a private message to a private number.")
+    await client.send_message(ctx.message.channel, author + " has sent a private message to a private number.")
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
