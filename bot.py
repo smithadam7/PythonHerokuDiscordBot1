@@ -74,6 +74,11 @@ async def bye(ctx):
     await client.send_message(ctx.message.channel, "bye")
 
 @client.command(pass_context=True)
+async def echoname(ctx):
+    server = ctx.message.server
+    await client.send_message(ctx.message.channel, ctx.message.author)
+
+@client.command(pass_context=True)
 async def edit(ctx):
     server = ctx.message.server
     await client.delete_message(ctx.message)
@@ -114,7 +119,7 @@ async def text(ctx, carrier, phonenumber, textmessage):
     server.login(username, password)
     server.sendmail(username, reciever, textmessage)
     server.quit()
-    await client.send_message(ctx.message.channel, "(" + textmessage + ")" + " sent to private number.")
+    await client.send_message(ctx.message.channel, ctx.message.author + " has sent a private message to a private number.")
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
