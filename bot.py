@@ -120,7 +120,7 @@ async def text(ctx, carrier, phonenumber, textmessage):
     server.login(username, password)
     server.sendmail(username, reciever, textmessage)
     server.quit()
-    await client.send_message(ctx.message.channel, author + " has sent a private message to a private number.")
+    await client.send_message(ctx.message.channel, "A private user" + " has sent a private message to a private number.")
 
 @client.command(pass_context=True)
 async def add(ctx, left: int, right: int):
